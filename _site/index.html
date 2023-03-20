@@ -56,7 +56,7 @@
             <div class="is-size-5 publication-authors">
               <!-- Paper authors -->
               <span class="author-block">
-                <a href="www.jonggyu.me" target="_blank">Jonggyu Jang</a><sup>1</sup>,</span>
+                <a href="https://www.jonggyu.me" target="_blank">Jonggyu Jang</a><sup>1</sup>,</span>
                 <span class="author-block">
                   <a target="_blank">Youjin Kim</a><sup>1</sup>,</span>
                   <span class="author-block">
@@ -81,6 +81,7 @@
                   <div class="column has-text-centered">
                     <div class="publication-links">
                          <!-- Arxiv PDF link -->
+                         <!--
                       <span class="link-block">
                         <a href="https://arxiv.org/pdf/<ARXIV PAPER ID>.pdf" target="_blank"
                         class="external-link button is-normal is-rounded is-dark">
@@ -90,8 +91,10 @@
                         <span>Paper</span>
                       </a>
                     </span>
+                        -->
 
                     <!-- Supplementary PDF link -->
+                         <!--
                     <span class="link-block">
                       <a href="static/pdfs/supplementary_material.pdf" target="_blank"
                       class="external-link button is-normal is-rounded is-dark">
@@ -101,8 +104,10 @@
                       <span>Supplementary</span>
                     </a>
                   </span>
+                        -->
 
                   <!-- Github link -->
+                         <!--
                   <span class="link-block">
                     <a href="https://github.com/YOUR REPO HERE" target="_blank"
                     class="external-link button is-normal is-rounded is-dark">
@@ -112,15 +117,16 @@
                     <span>Code</span>
                   </a>
                 </span>
+                         -->
 
                 <!-- ArXiv abstract Link -->
                 <span class="link-block">
-                  <a href="https://arxiv.org/abs/<ARXIV PAPER ID>" target="_blank"
+                  <a href="" target="_blank"
                   class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                     <i class="ai ai-arxiv"></i>
                   </span>
-                  <span>arXiv</span>
+                  <span>Download Dataset (temporarily unavailable)</span>
                 </a>
               </span>
             </div>
@@ -131,13 +137,35 @@
   </div>
 </section>
 
+<!-- Image carousel -->
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+       <div class="item">
+        <!-- Your image here -->
+        <img src="static/images/HSI_dataset.png" style="width:60%; margin:auto; display:block" alt="MY ALT TEXT"/>
+        <h2 class="subtitle has-text-centered">
+          Hyperspectral Sensor Dataset Samples.
+        </h2>
+      </div>
+      <div class="item">
+        <!-- Your image here -->
+        <img src="static/images/RGB_dataset.png" style="width:60%; margin:auto; display:block" alt="MY ALT TEXT"/>
+        <h2 class="subtitle has-text-centered">
+          RGB Sensor Dataset Samples.
+        </h2>
+      </div>
+  </div>
+</div>
+</div>
+<!-- Image carousel END -->
 
-<!-- Teaser video-->
+<!-- Teaser video
 <section class="hero teaser">
   <div class="container is-max-desktop">
     <div class="hero-body">
       <video poster="" id="tree" autoplay controls muted loop height="100%">
-        <!-- Your video here -->
         <source src="static/videos/banner_video.mp4"
         type="video/mp4">
       </video>
@@ -147,7 +175,7 @@
     </div>
   </div>
 </section>
-<!-- End teaser video -->
+End teaser video -->
 
 <!-- Paper abstract -->
 <section class="section hero is-light">
@@ -156,8 +184,8 @@
       <div class="column is-four-fifths">
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ullamcorper tellus sed ante aliquam tempus. Etiam porttitor urna feugiat nibh elementum, et tempor dolor mattis. Donec accumsan enim augue, a vulputate nisi sodales sit amet. Proin bibendum ex eget mauris cursus euismod nec et nibh. Maecenas ac gravida ante, nec cursus dui. Vivamus purus nibh, placerat ac purus eget, sagittis vestibulum metus. Sed vestibulum bibendum lectus gravida commodo. Pellentesque auctor leo vitae sagittis suscipit.
+          <p> Recently, object detection in aerial RGB, infrared, or synthetic-aperture radar images has drawn increasing research attention. Our focus is maritime object detection mainly for detecting and localizing ships and floating matters, which is an imperative task for reliable surveillance/monitoring and active rescuing. Notwithstanding astonishing advances of computer vision technologies, the task becomes challenging as cameras’ field of view and/or object distance increases. What makes it worse is pervasive sea surface effects such as sunlight reflection, wind, and waves. Hyperspectral image (HSI) sensors, providing more than 100 channels in wavelengths of visible and nearinfrared, can extract intrinsic information of materials from a few pixels of HSIs. The advent of HSI sensors motivates us to leverage HSIs to circumvent false positives due to the sea surface effects. However, there are handful public HSI datasets because collecting HSIs is monetarily costly and laborintensive. Lack of public datasets is the major hindrance to object detection research based on HSIs. 
+          We have collected and annotated a publicly available dataset “Multi-Modal Ship and flOating matter Detection in Aerial Images (M<sup>2</sup>SODAI),” which comes with 1,257 synchronized image pairs of 1600×1600 pixel RGB data and 224×224 pixel HSI data. For diversity, we did 59 flight strips in 12 flight measurement campaigns (11 different spots). The M2SODAI dataset contains 5,946 instances per category, each of which is labeled by a bounding box. To the best of our knowledge, this dataset is the first bounding-box-annotated and synchronized aerial RGB/HSI dataset. For the detection algorithm, we propose a DoubleFPN architecture, a novel multi-modal extension of the feature pyramid network (FPN). Extensive experiments on our benchmark demonstrate that fusion of RGB and HSI data can enhance mAP, especially in the presence of the sea surface effects. The source code and dataset will be available soon.
           </p>
         </div>
       </div>
@@ -167,59 +195,14 @@
 <!-- End paper abstract -->
 
 
-<!-- Image carousel -->
+
 <section class="hero is-small">
   <div class="hero-body">
     <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-       <div class="item">
-        <!-- Your image here -->
-        <img src="static/images/carousel1.jpg" alt="MY ALT TEXT"/>
-        <h2 class="subtitle has-text-centered">
-          First image description.
-        </h2>
-      </div>
-      <div class="item">
-        <!-- Your image here -->
-        <img src="static/images/carousel2.jpg" alt="MY ALT TEXT"/>
-        <h2 class="subtitle has-text-centered">
-          Second image description.
-        </h2>
-      </div>
-      <div class="item">
-        <!-- Your image here -->
-        <img src="static/images/carousel3.jpg" alt="MY ALT TEXT"/>
-        <h2 class="subtitle has-text-centered">
-         Third image description.
-       </h2>
-     </div>
-     <div class="item">
-      <!-- Your image here -->
-      <img src="static/images/carousel4.jpg" alt="MY ALT TEXT"/>
-      <h2 class="subtitle has-text-centered">
-        Fourth image description.
-      </h2>
-    </div>
-  </div>
-</div>
-</div>
-</section>
-<!-- End image carousel -->
-
-
-
-
-<!-- Youtube video -->
-<section class="hero is-small is-light">
-  <div class="hero-body">
-    <div class="container">
-      <!-- Paper video. -->
-      <h2 class="title is-3">Video Presentation</h2>
+      <h2 class="title is-3">Data Collection Methods</h2>
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
-          
           <div class="publication-video">
-            <!-- Youtube embed code here -->
             <iframe src="https://www.youtube.com/embed/JkaxUblCGz0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
           </div>
         </div>
@@ -227,10 +210,28 @@
     </div>
   </div>
 </section>
-<!-- End youtube video -->
 
 
-<!-- Video carousel -->
+<!-- Youtube video
+<section class="hero is-small is-light">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3">Video Presentation</h2>
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          
+          <div class="publication-video">
+            <iframe src="https://www.youtube.com/embed/JkaxUblCGz0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+End youtube video -->
+
+
+<!-- Video carousel 
 <section class="hero is-small">
   <div class="hero-body">
     <div class="container">
@@ -238,21 +239,18 @@
       <div id="results-carousel" class="carousel results-carousel">
         <div class="item item-video1">
           <video poster="" id="video1" autoplay controls muted loop height="100%">
-            <!-- Your video file here -->
             <source src="static/videos/carousel1.mp4"
             type="video/mp4">
           </video>
         </div>
         <div class="item item-video2">
           <video poster="" id="video2" autoplay controls muted loop height="100%">
-            <!-- Your video file here -->
             <source src="static/videos/carousel2.mp4"
             type="video/mp4">
           </video>
         </div>
         <div class="item item-video3">
           <video poster="" id="video3" autoplay controls muted loop height="100%">\
-            <!-- Your video file here -->
             <source src="static/videos/carousel3.mp4"
             type="video/mp4">
           </video>
@@ -261,14 +259,14 @@
     </div>
   </div>
 </section>
-<!-- End video carousel -->
+End video carousel -->
 
 
 
 
 
 
-<!-- Paper poster -->
+<!-- Paper poster 
 <section class="hero is-small is-light">
   <div class="hero-body">
     <div class="container">
@@ -280,17 +278,17 @@
       </div>
     </div>
   </section>
-<!--End paper poster -->
+End paper poster -->
 
 
-<!--BibTex citation -->
+<!--BibTex citation 
   <section class="section" id="BibTeX">
     <div class="container is-max-desktop content">
       <h2 class="title">BibTeX</h2>
       <pre><code>BibTex Code Here</code></pre>
     </div>
 </section>
-<!--End BibTex citation -->
+End BibTex citation -->
 
 
   <footer class="footer">
