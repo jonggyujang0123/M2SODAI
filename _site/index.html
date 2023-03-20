@@ -141,22 +141,26 @@
 <section class="hero is-small">
   <div class="hero-body">
     <div class="container">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
       <div id="results-carousel" class="carousel results-carousel">
        <div class="item">
         <!-- Your image here -->
-        <img src="static/images/HSI_dataset.png" style="width:60%; margin:auto; display:block" alt="MY ALT TEXT"/>
+        <img src="static/images/HSI_dataset.png" style="width:80%; margin:auto; display:block" alt="MY ALT TEXT"/>
         <h2 class="subtitle has-text-centered">
           Hyperspectral Sensor Dataset Samples.
         </h2>
       </div>
       <div class="item">
         <!-- Your image here -->
-        <img src="static/images/RGB_dataset.png" style="width:60%; margin:auto; display:block" alt="MY ALT TEXT"/>
+        <img src="static/images/RGB_dataset.png" style="width:80%; margin:auto; display:block" alt="MY ALT TEXT"/>
         <h2 class="subtitle has-text-centered">
           RGB Sensor Dataset Samples.
         </h2>
       </div>
   </div>
+</div>
+</div>
 </div>
 </div>
 <!-- Image carousel END -->
@@ -199,12 +203,46 @@ End teaser video -->
 <section class="hero is-small">
   <div class="hero-body">
     <div class="container">
-      <h2 class="title is-3">Data Collection Methods</h2>
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
-          <div class="publication-video">
-            <iframe src="https://www.youtube.com/embed/JkaxUblCGz0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-          </div>
+      <h2 class="title is-3">Data Collection Methods</h2>
+            <h2 class="title is-4" style="text-align:left">
+              1. Flight Campaigns for Collecting Raw Data 
+            </h2>
+          <div class="item">
+            <!-- Your image here -->
+            <img src="static/images/first_shot.gif" style="width:80%; margin:auto; display:block" alt="MY ALT TEXT"/>
+            <div class="content has-text-justified">
+            <p>In the first stage, we collect RGB and HSI sensor data using a single-engine utility aircraft equipped with RGB and HSI sensors. To this end, we built a data collection system by leveraging a single-engine utility aircraft (Cessna Grand Caravan 208B). An HSI sensor (AsiaFENIX, Specim, Oulu, Finland) and an RGB sensor (DMC, Z/I Imaging, Aalen, Germany) are equipped on the bottom of the aircraft, the direction of which is downward. The raw data was acquired through 59 flight strips in 12 flight measurement campaigns, which cover a total area of 299.7 km2 . During the flight strips, the aircraft maintains its speed of 260 km/h and altitude of 1 km. </p>
+            </div>
+            <h2 class="title is-4" style="text-align:left">
+              2. Image Registration
+            </h2>
+          <div class="item">
+            <!-- Your image here -->
+            <img src="static/images/second_shot.gif" style="width:80%; margin:auto; display:block" alt="MY ALT TEXT"/>
+            <div class="content has-text-justified">
+                <p> Since the size of the raw data is too large for object detection (HSI: 3,220<sup>2</sup> pixels, and RGB: 22,520<sup>2</sup> pixels on average), we cropped the raw data into a fixed size. We note that RGB and HSI data are cropped in size of 1600 × 1600 × 3 and 224 × 224 × 127, respectively. However, the problem is that the coordinates of the collected RGB and HSI pairs are not matched. Hence, we employ an image registration method to correct pixel offsets between RGB and HSI pairs.
+            </p>
+            </div>
+            <img src="static/images/third_shot.png" style="width:80%; margin:auto; display:block" alt="MY ALT TEXT"/>
+            <div class="content has-text-justified">
+                <p> (a) The RGB and HSI sensor data are transformed by a gray scaler and a contrast enhancer. (b) The matched feature of transformed sensor data and the corresponding homography matrix are obtained. (c) The sensor data are registered, cropped, and labeled. </p>
+            </div>
+            <h2 class="title is-4" style="text-align:left">
+              3. Object Detection Results and Feature Map Analysis
+            </h2>
+          <div class="item">
+            <!-- Your image here -->
+            <img src="static/images/result1.png" style="width:80%; margin:auto; display:block" alt="MY ALT TEXT"/>
+            <div class="content has-text-justified">
+                <p> The floating matters and ship are labeled by purple and blue colors, respectively. For comparison, the ground truth bounding boxes and our detection results are depicted. </p>
+            </div>
+            <img src="static/images/result2.png" style="width:80%; margin:auto; display:block" alt="MY ALT TEXT"/>
+            <div class="content has-text-justified">
+            <p> The strongest feature among channels is selected for each pixel for visualization. In the left and right figures, the feature maps of our method and the RGB-only uni-modal FPN are depicted, in which the input data are with sea surface effects. In the middle figures, the feature maps without sea surface effects are depicted. For the data in the clean sea (middle), both methods provide clean feature maps; however, with the sea surface effects (left/right), our method furnishes clearer feature maps than the RGB-only uni-modal FPN. </p>
+            </div>
+      </div>
         </div>
       </div>
     </div>
