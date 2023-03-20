@@ -1,13 +1,7 @@
 # Academic Project Page Template
 This is an academic paper project page template.
 
-
-Example project pages built using this template are:
-- https://www.vision.huji.ac.il/deepsim/
-- https://www.vision.huji.ac.il/3d_ads/
-- https://www.vision.huji.ac.il/ssrl_ad/
-- https://www.vision.huji.ac.il/conffusion/
-
+A example of built page is [https://m2sodai.jonggyu.me/](https://m2sodai.jonggyu.me/)
 
 ## Start using the template
 To start using the template click on `Use this Template`.
