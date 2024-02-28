@@ -13,6 +13,8 @@ Until 2024/03/20, we will fix this issue by
 
 Sincerely sorry for inconvenience
 
+Thanks to Another-0 and Xiaodian Zhang
+
 ---
 
 ## 1. Install Dependencies
