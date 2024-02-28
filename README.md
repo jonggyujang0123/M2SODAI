@@ -1,6 +1,19 @@
 # M<sup>2</sup>SODAI Dataset
 
+---
 
+:warning: **2024/02: This repo requires some updates**
+
+Thank you for your interest in our repository. 
+Now, we recognize that some files are missing when we upload the source code (data preprocessing).
+
+Until 2024/03/20, we will fix this issue by 
+- Uploading preprocessing code, as well as **processed data**.
+- Replica of the trained weights
+
+Sincerely sorry for inconvenience
+
+---
 
 ## 1. Install Dependencies
 
