@@ -1,23 +1,28 @@
-# M<sup>2</sup>SODAI Dataset
+<h1 align="center"> M<sup>2</sup>SODAI: Multi-Modal Ship and Floating Matter Detection Image Dataset With RGB and Hyperspectral Image Sensors
+</h1>
+
+<p align="center">
+  Jonggyu Jang, Sangwoo Oh, Youjin Kim, Dongmin Seo, Youngchol Choi, Hyun Jong Yang
+</p>
+
+<p align="center">
+  Conference on Neural Information Processing (NeurIPS) 2023
+</p>
+
+**Paper link:** [proceedings.neurips.cc](https://proceedings.neurips.cc/paper_files/paper/2023/hash/a8757b889350a3782b384a3ec0dfbae9-Abstract-Datasets_and_Benchmarks.html)
+
+<img width="900" alt="image" src="https://github.com/jonggyujang0123/M2SODAI/assets/88477912/fb42288e-1662-469d-a72d-6e3ed46fc394">
 
 ---
 
-:warning: **2024/02: This repo requires some updates**
+## Updates
 
-Thank you for your interest in our repository. 
-Now, we recognize that some files are missing when we upload the source code (data preprocessing).
+- 🆕 **2024/03:** We upload `the Replica of the trained weights` and `preprocessing code`. 
+- ⚠️ **2024/02: This repo requires some updates:** Now, we recognize that some files are missing when we upload the source code (data preprocessing). Until 2024/03/20, we will fix this issue by **Uploading preprocessing code, as well as **processed data** and **Replica of the trained weights**. Thanks to Another-0 and Xiaodian Zhang.
 
-Until 2024/03/20, we will fix this issue by 
-- Uploading preprocessing code, as well as **processed data**.
-- Replica of the trained weights
+--- 
 
-Sincerely sorry for inconvenience
-
-Thanks to Another-0 and Xiaodian Zhang
-
----
-
-## 1. Install Dependencies
+## Installation
 
 1. Anaconda
 
@@ -51,26 +56,34 @@ pip install -v -e .  # or "python setup.py develop"
 pip install labelme==4.5.13
 ```
 
-## 2. Prepare Dataset
+## Prepare Dataset
 
+- Dataset: [GDrive](https://docs.google.com/uc?export=download&id=1vPReTPfYSLsKGUdrjqi0l_nCNDZyr5d6)
+- Preprocessed Dataset: [Gdrive]() (will be added soon)
+- Pretrained weights: [R50]() ()
 
+Download the processed data via the above link or you can generate it yourself.
 
-1. Download data
-
-```bash
-wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1vPReTPfYSLsKGUdrjqi0l_nCNDZyr5d6' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1vPReTPfYSLsKGUdrjqi0l_nCNDZyr5d6" -O m2sodai.zip && rm -rf /tmp/cookies.txt  
+```
+.M2SODAI
+├── configs
+├── data_tools
+├── ...
+├── data
+│   ├── train
+│   ├── test
+│   ├── val
+│   ├── train_coco (will be generated)
+│   ├── test_coco (will be generated)
+│   ├── val_coco (will be generated)
+│   ├── mean_std.mat (will be generated)
+│   ├── model.pkl (will be generated)
+│   ├── ...
+│   └── label.txt
 ```
 
-2. Unzip
 
-```bash
-unzip new.zip
-rm new.zip
-# use softlink 
-ln -sf {source} {dest ex. data}
-```
-
-3. run data_tools/lableme2coco.py 
+- run data_tools/lableme2coco.py 
 
 ```bash
 python data_tools/labelme2coco.py data/test data/test_coco --label data/label.txt
@@ -78,26 +91,30 @@ python data_tools/labelme2coco.py data/train data/train_coco --label data/label.
 python data_tools/labelme2coco.py data/val data/val_coco --label data/label.txt
 ```
 
-
-## 3. How to RUN?
-
-1. Check dataset
-
-
-2. Compute the mean and variance of the data set.
+- make mean_std.mat
 
 ```bash
-python ./data_tools/mean_var_calculator.py
-python ./data_tools/mean_var_calculator_jpg.py
+python data_tools/mean_var_calculator.py --dir data/train/
 ```
 
-3. Training
+- make model.pkl (IPCA)
 
 ```bash
-python tools/train.py {config_file}
+python tools/IPCA_data.py
 ```
 
-4. Evaluation (test)
+
+## How to RUN?
+
+- Training
+
+```bash
+python tools/train.py {config_file} 
+```
+
+ex) X50 configuration file is in `configs/faster_rcnn/faster_rcnn_x50_rgb_hsi.py`
+
+- Evaluation
 
 ~~~
 python tools/test.py {config_file} {output_file} --eval bbox --show-score-thr 0.5
