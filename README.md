@@ -58,7 +58,7 @@ pip install labelme==4.5.13
 
 ## Prepare Dataset
 
-- Dataset: [GDrive](https://docs.google.com/uc?export=download&id=1vPReTPfYSLsKGUdrjqi0l_nCNDZyr5d6)
+- Dataset: [GDrive]() (v1.1 Will be uploaded Soon)
 - Preprocessed Dataset: [Gdrive]() (will be added soon)
 - Pretrained weights: [R50]() ()
 
