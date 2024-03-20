@@ -1,4 +1,9 @@
-**⚠️ Now, I recognize some files are wrong, I will fix it soon, until end of Mar**
+<p align="center"> 
+  <b>⚠️ Now, I recognize some files are wrong, I will fix it soon, until the end of Mar.</b> <br>
+  Sorry, I found some errors caused when I uploaded the final version source code before. I am suffering from too many versions of my previous code. The problem will be fixed soon.
+</p>
+
+---
 
 <h1 align="center"> M<sup>2</sup>SODAI: Multi-Modal Ship and Floating Matter Detection Image Dataset With RGB and Hyperspectral Image Sensors
 </h1>
