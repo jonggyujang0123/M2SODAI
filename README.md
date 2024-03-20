@@ -17,7 +17,7 @@
 
 ## Updates
 
-- 🆕 **2024/03:** We upload `the Replica of the trained weights` and `preprocessing code`. 
+- 🆕 **2024/03:** We upload `the Replica of the trained weights` and `preprocessing code`. (Now, I recognize some files are wrong, I will fix it soon, until end of Mar)
 - ⚠️ **2024/02: This repo requires some updates:** Now, we recognize that some files are missing when we upload the source code (data preprocessing). Until 2024/03/20, we will fix this issue by **Uploading preprocessing code, as well as **processed data** and **Replica of the trained weights**. Thanks to Another-0 and Xiaodian Zhang.
 
 --- 
