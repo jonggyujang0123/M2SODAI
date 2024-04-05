@@ -1,6 +1,10 @@
+<h1 align="center"> 
+Sorry for my lateness.
+</h1>
+
 <p align="center"> 
-  <b>⚠️ Now, I recognize some files are wrong, I will fix it soon until <del>the end of Mar</del>. April. 7. Sorry for lateness. </b> <br>
-  Sorry, I found some errors caused when I uploaded the final version code before. I am suffering from many versions of my previous code. The problem will be fixed soon.
+  <b>⚠️ Now, I recognize some files are wrong, I will fix it soon until <del>the end of Mar</del>. Mid-April. Once again, <u>Sorry for my lateness.</u> </b> <br>
+  <b> We are almost there, and we promise that the problem will be fixed soon. </b>
 </p>
 
 ---
