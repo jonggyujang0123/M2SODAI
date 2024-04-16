@@ -1,6 +1,6 @@
 > :warning: Because I did not regularly check the issue tab, my response is usually delayed a few days. I am sincerely sorry for that. Hence, I closed the issue tab and made [this form](https://forms.gle/fNu5fic3wSC16KU37).
 > Now, please directly email me via **jgjang [at] gmail [dot] com** or fill out [this form](https://forms.gle/fNu5fic3wSC16KU37). If I am not too busy, you will receive the email in 24 hours. Simple questions and chatting (even not related to this work) are welcome!
-> I will do my best to update to prevent the same issues from recurring.
+> I will do my best to update to prevent the same issues from recurring (See [FAQ](https://github.com/jonggyujang0123/M2SODAI/edit/master/README.md#5-faq)).
 
 ---
 
@@ -134,6 +134,8 @@ python tools/test.py {config_file} {ckpt_file} --eval bbox
 ## 4. TODO LIST
 
 - [ ] Something... 
+
+## 5. FAQ
 
 
 ## Acknowledgment 
