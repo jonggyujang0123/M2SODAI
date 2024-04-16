@@ -15,14 +15,14 @@
 
 ---
 
-## Updates
+## News
 
-- 🆕 **2024/03:** We upload `the Replica of the trained weights` and `preprocessing code`. 
-- ⚠️ **2024/02: This repo requires some updates:** Now, we recognize that some files are missing when we upload the source code (data preprocessing). Until 2024/03/20, we will fix this issue by **Uploading preprocessing code, as well as **processed data** and **Replica of the trained weights**. Thanks to Another-0 and Xiaodian Zhang.
+- **2024/04:** We correct this repo. Thanks to `Another-0` and `Xiaodian Zhang`. We sincerely apologize for being later than the promised time, and we truly appreciate your continued interest in our work.
+- **2024/02: This repo requires some updates:** Now, we recognize that some files are missing when we upload the source code (data preprocessing). We will fix this issue by **Uploading preprocessing code**, as well as **processed data** and **Replica of the trained weights**. 
 
 --- 
 
-## Installation
+## 1. Installation
 
 1. Anaconda
 
@@ -34,8 +34,6 @@ conda create -n Maritime python=3.7
 
 ```bash
 pip install torch==1.7.1+cu110 torchvision==0.8.2+cu110 torchaudio===0.7.2 -f https://download.pytorch.org/whl/torch_stable.html
-conda install jupyterlab
-jupyter server extension disable nbclassic
 ```
 
 3. Other extra dependencies
@@ -53,14 +51,11 @@ pip install git+https://github.com/lvis-dataset/lvis-api.git
 pip install -r requirements/albu.txt
 pip install -r requirements/build.txt
 pip install -v -e .  # or "python setup.py develop"
-pip install labelme==4.5.13
 ```
 
-## Prepare Dataset
+## 2. Prepare Dataset
 
-- Dataset: [GDrive](https://docs.google.com/uc?export=download&id=1vPReTPfYSLsKGUdrjqi0l_nCNDZyr5d6)
-- Preprocessed Dataset: [Gdrive]() (will be added soon)
-- Pretrained weights: [R50]() ()
+- Dataset: [GDrive](https://drive.google.com/file/d/1yGDveAVqwus_cMltHnwaR_Lx97zIatoG/view?usp=sharing)
 
 Download the processed data via the above link or you can generate it yourself.
 
@@ -73,11 +68,11 @@ Download the processed data via the above link or you can generate it yourself.
 │   ├── train
 │   ├── test
 │   ├── val
-│   ├── train_coco (will be generated)
-│   ├── test_coco (will be generated)
-│   ├── val_coco (will be generated)
-│   ├── mean_std.mat (will be generated)
-│   ├── model.pkl (will be generated)
+│   ├── train_coco
+│   ├── test_coco
+│   ├── val_coco
+│   ├── pca_mean_std.mat
+│   ├── model.pkl
 │   ├── ...
 │   └── label.txt
 ```
@@ -86,25 +81,19 @@ Download the processed data via the above link or you can generate it yourself.
 - run data_tools/lableme2coco.py 
 
 ```bash
-python data_tools/labelme2coco.py data/test data/test_coco --label data/label.txt
 python data_tools/labelme2coco.py data/train data/train_coco --label data/label.txt
+python data_tools/labelme2coco.py data/test data/test_coco --label data/label.txt
 python data_tools/labelme2coco.py data/val data/val_coco --label data/label.txt
 ```
 
-- make mean_std.mat
-
-```bash
-python data_tools/mean_var_calculator.py --dir data/train/
-```
-
-- make model.pkl (IPCA)
+- make `pca_mean_std.mat` and IPCA. 
 
 ```bash
 python tools/IPCA_data.py
 ```
 
 
-## How to RUN?
+## 3. How to RUN?
 
 - Training
 
@@ -112,13 +101,30 @@ python tools/IPCA_data.py
 python tools/train.py {config_file} 
 ```
 
-ex) X50 configuration file is in `configs/faster_rcnn/faster_rcnn_x50_rgb_hsi.py`
-
+ex) R50 configuration file is in `configs/faster_rcnn/faster_rcnn_r50_rgb_hsi.py`
+ex) `python tools/train.py configs/faster_rcnn_faster_rcnn_r50_rgb_hsi.py`
 - Evaluation
 
 ~~~
-python tools/test.py {config_file} {output_file} --eval bbox --show-score-thr 0.5
+python tools/test.py {config_file} {ckpt_file} --eval bbox
 ~~~
+
+
+### 3.1. Replica of Trained Weights
+- R-50-RGB-HSI
+  - mAP: 43.7
+  - Model [(link)](https://drive.google.com/file/d/1yFmdFjg-Cb3mDlsg7LcTtVq3EewN9Aq_/view?usp=sharing)
+- R-50-RGB
+  - mAP: 37.7
+  - Model [(link)](https://drive.google.com/file/d/1yFkNq1imh_ajxcY9pq7GEE23md0gB9mC/view?usp=sharing)
+- R-50-HSI (The mAP is enhanced while correcting our code)
+  - mAP: 13.2
+  - Model [(link)](https://drive.google.com/file/d/1yFE_yEZdQysPF1JQWBzvKRhyjg0CQHOG/view?usp=sharing)
+
+
+## 4. TODO LIST
+
+- [ ] Something... 
 
 
 ## Acknowledgment 

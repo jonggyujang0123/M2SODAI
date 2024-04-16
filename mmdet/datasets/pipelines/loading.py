@@ -44,6 +44,8 @@ class LoadImageFrom_JPG_HSI:
         self.to_float32 = to_float32
         self.color_type = color_type
         self.channel_order = channel_order
+        self.mean_pca = sio.loadmat('./data/pca_mean_std.mat')['mean'].reshape([1,1,-1])
+        self.std_pca = sio.loadmat('./data/pca_mean_std.mat')['std'].reshape([1,1, -1])
         self.file_client_args = file_client_args.copy()
         self.file_client = None
 
@@ -86,6 +88,7 @@ class LoadImageFrom_JPG_HSI:
         filename_hsi= filename_hsi.replace('/JPEGImages', '')
         filename_hsi= filename_hsi.replace('_coco', '_pca')
         hsi = sio.loadmat(filename_hsi)['data']
+        hsi = ( (hsi - self.mean_pca) / self.std_pca ).astype(np.half)
 
         if self.file_client is None:
             self.file_client = mmcv.FileClient(**self.file_client_args)
@@ -143,6 +146,8 @@ class LoadImageFromHSI:
         self.color_type = color_type
         self.channel_order = channel_order
         self.file_client_args = file_client_args.copy()
+        self.mean_pca = sio.loadmat('./data/pca_mean_std.mat')['mean'].reshape([1,1,-1])
+        self.std_pca = sio.loadmat('./data/pca_mean_std.mat')['std'].reshape([1,1, -1])
         self.file_client = None
 
 
@@ -168,8 +173,9 @@ class LoadImageFromHSI:
         #img_bytes = self.file_client.get(filename)
         filename= filename.replace('.jpg','.mat')
         filename= filename.replace('/JPEGImages', '')
-        filename= filename.replace('_coco', '')
+        filename= filename.replace('_coco', '_pca')
         img = sio.loadmat(filename)['data']
+        img = ( (img - self.mean_pca) / self.std_pca )
         if self.to_float32:
             img = img.astype(np.float32)
 

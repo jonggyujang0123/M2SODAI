@@ -5,55 +5,76 @@ import torch
 
 from ..builder import DETECTORS, build_backbone, build_head, build_neck
 from .base_final import BaseDetectorFinal
-
-from itertools import zip_longest
-from torchvision import transforms
-from PIL import Image
 import torch.nn.functional as F
-import numpy as np
 
 
 from torch import Tensor
 
+import torch.nn as nn
+import torch.nn.functional as F
 
-def gumbel_sigmoid(logits: Tensor, tau: float = 1, hard: bool = False, threshold: float = 0.0) -> Tensor:
-    """
-    Samples from the Gumbel-Sigmoid distribution and optionally discretizes.
-    The discretization converts the values greater than `threshold` to 1 and the rest to 0.
-    The code is adapted from the official PyTorch implementation of gumbel_softmax:
-    https://pytorch.org/docs/stable/_modules/torch/nn/functional.html#gumbel_softmax
+class Mish(nn.Module):
+    __constants__ = ['inplace']
+    inplace: bool
 
-    Args:
-      logits: `[..., num_features]` unnormalized log probabilities
-      tau: non-negative scalar temperature
-      hard: if ``True``, the returned samples will be discretized,
-            but will be differentiated as if it is the soft sample in autograd
-     threshold: threshold for the discretization,
-                values greater than this will be set to 1 and the rest to 0
+    def __init__(self, inplace: bool = False):
+        super().__init__()
+        self.inplace = inplace
 
-    Returns:
-      Sampled tensor of same shape as `logits` from the Gumbel-Sigmoid distribution.
-      If ``hard=True``, the returned samples are descretized according to `threshold`, otherwise they will
-      be probability distributions.
 
-    """
-    gumbels = (
-        -torch.empty_like(logits, memory_format=torch.legacy_contiguous_format).exponential_().log()
-    )  # ~Gumbel(0, 1)
-    gumbels = (logits + gumbels) / tau  # ~Gumbel(logits, tau)
-    y_soft = gumbels.sigmoid()
+    def forward(self, input: Tensor) -> Tensor:
+        return input * F.softplus(input).tanh()
 
-    if hard:
-        # Straight through.
-        indices = (y_soft > threshold).nonzero(as_tuple=True)
-        y_hard = torch.zeros_like(logits, memory_format=torch.legacy_contiguous_format)
-        y_hard[indices[0], indices[1]] = 1.0
-        ret = y_hard - y_soft.detach() + y_soft
-    else:
-        # Reparametrization trick.
-        ret = y_soft
-    return ret
+    def extra_repr(self) -> str:
+        inplace_str = 'inplace=True' if self.inplace else ''
+        return inplace_str
 
+
+
+class conv1_hsi(nn.Module):
+    def __init__(self):
+        super().__init__() 
+        bias = False
+        self.nets1 = nn.Sequential(
+                nn.Conv3d(1, 6, (7, 7, 7), (2, 1, 1), (3, 3, 3), bias=False),
+                Mish(),
+                nn.Conv3d(6, 12, (3, 3, 3), (2, 1, 1), (0, 1, 1),bias=bias),
+                Mish(),
+                nn.Flatten(1, 2),
+            )
+        self.nets2 =nn.Sequential(
+                nn.Conv3d(1, 6, (5, 5, 5), (2, 1, 1), (2, 2, 2), bias= False),
+                Mish(),
+                nn.Conv3d(6, 12, (3, 3, 3), (2, 1, 1), (1, 1, 1),bias=bias),
+                Mish(),
+                nn.Conv3d(12, 24, (3, 3, 3), (2, 1, 1), (1, 1, 1),bias=bias),
+                Mish(),
+                nn.Flatten(1, 2),
+            )
+        self.nets3 =nn.Sequential(
+                nn.Conv3d(1, 6, (3, 3, 3), (2, 1, 1), (1, 1, 1), bias= False),
+                Mish(),
+                nn.Conv3d(6, 12, (3, 3, 3), (2, 1, 1), (1, 1, 1),bias=bias),
+                Mish(),
+                nn.Conv3d(12, 24, (3, 3, 3), (2, 1, 1), (1, 1, 1),bias=bias),
+                Mish(),
+                nn.Conv3d(24, 48, (3, 3, 3), (2, 1, 1), (1, 1, 1),bias=bias),
+                Mish(),
+                nn.Flatten(1, 2),
+            )
+        self.convnet = nn.Conv2d(84+96+96, 64, 3, 1, 1, bias=False)
+        
+    def forward(self, x):
+        x = torch.cat(
+                [
+                    self.nets1(x.unsqueeze(1)),
+                    self.nets2(x.unsqueeze(1)),
+                    self.nets3(x.unsqueeze(1)),
+                    ],
+                dim= 1)
+
+        x = self.convnet(x)
+        return x
 
 @DETECTORS.register_module()
 class TwoStageDetectorDFPN(BaseDetectorFinal):
@@ -81,6 +102,8 @@ class TwoStageDetectorDFPN(BaseDetectorFinal):
             backbone.pretrained = pretrained
         self.backbone = build_backbone(backbone)
         self.backbone_hsi = build_backbone(backbone_hsi)
+        self.backbone_hsi.conv1 = conv1_hsi()
+        self.backbone_hsi.maxpool = nn.Identity()
 
         if neck is not None:
             self.neck = build_neck(neck)
@@ -103,82 +126,11 @@ class TwoStageDetectorDFPN(BaseDetectorFinal):
 
         self.train_cfg = train_cfg
         self.test_cfg = test_cfg
-        k_size = 1
-        padding = k_size//2
-        self.conv_down = torch.nn.ModuleList([
-            torch.nn.Sequential(
-                torch.nn.Conv2d(256, 256, kernel_size=k_size, stride=1, padding=padding),
-                torch.nn.GroupNorm(32,256),
-                torch.nn.LeakyReLU(inplace=True),
-            ),
-            torch.nn.Sequential(
-                torch.nn.Conv2d(512, 256, kernel_size=k_size, stride=1, padding=padding),
-                torch.nn.GroupNorm(32,256),
-                torch.nn.LeakyReLU(inplace=True),
-            ),
-            torch.nn.Sequential(
-                torch.nn.Conv2d(1024, 256, kernel_size=k_size, stride=1, padding=padding),
-                torch.nn.GroupNorm(32,256),
-                torch.nn.LeakyReLU(inplace=True),
-            ),
-            torch.nn.Sequential(
-                torch.nn.Conv2d(2048, 256, kernel_size=k_size, stride=1, padding=padding),
-                torch.nn.GroupNorm(32,256),
-                torch.nn.LeakyReLU(inplace=True),
-            )
-        ])
-        k_size = 5
-        padding = k_size//2
-        self.conv_fusion = torch.nn.Sequential(
-            torch.nn.Conv2d(512, 256, kernel_size=k_size, stride=1, padding=padding),
-            torch.nn.GroupNorm(32,256),
-            torch.nn.ReLU(inplace=True),
-            #  torch.nn.Conv2d(256, 256, kernel_size=k_size, stride=1, padding=padding),
-            #  torch.nn.GroupNorm(32,256),
-            #  torch.nn.ReLU(inplace=True),
-            #  torch.nn.Conv2d(256, 256, kernel_size=k_size, stride=1, padding=padding),
-            #  torch.nn.GroupNorm(32,256),
-            #  torch.nn.ReLU(inplace=True),
-            )
-        k_size = 5
-        padding = k_size//2
         self.conv_att = torch.nn.Sequential(
-            torch.nn.Conv2d(256, 256, kernel_size=k_size, stride=1, padding=padding),
-            torch.nn.GroupNorm(32,256),
-            torch.nn.ReLU(inplace=True),
-            torch.nn.Conv2d(256, 1, kernel_size=1, stride=1, padding=0),
-            torch.nn.Sigmoid(),
+            nn.Conv2d(256, 1, kernel_size=1, stride=1, padding=0),
+            nn.Sigmoid()
             )
-        self.up3 = torch.nn.Upsample(scale_factor=4, mode='nearest')
 
-        self.conv_neck_hsi = torch.nn.Sequential(
-                torch.nn.Conv2d(256, 256, kernel_size=1, stride=1, padding=0),
-                torch.nn.GroupNorm(32,256),
-                torch.nn.ReLU(inplace=True),
-                torch.nn.Conv2d(256, 256, kernel_size=3, stride=1, padding=1),
-                torch.nn.GroupNorm(32,256),
-                torch.nn.ReLU(inplace=True),
-                )
-        self.conv_hsi = torch.nn.Sequential(
-                torch.nn.Conv2d(30, 64, kernel_size=3, stride=1, padding=1),
-                torch.nn.GroupNorm(32,64),
-                torch.nn.ReLU(inplace=True),
-                torch.nn.Conv2d(64, 64, kernel_size=1, stride=1, padding=0),
-                torch.nn.GroupNorm(32,64),
-                torch.nn.ReLU(inplace=True),
-                torch.nn.Conv2d(64, 128, kernel_size=3, stride=1, padding=1),
-                torch.nn.GroupNorm(32,128),
-                torch.nn.ReLU(inplace=True),
-                torch.nn.Conv2d(128, 128, kernel_size=1, stride=1, padding=0),
-                torch.nn.GroupNorm(32,128),
-                torch.nn.ReLU(inplace=True),
-                torch.nn.Conv2d(128, 256, kernel_size=3, stride=1, padding=1),
-                torch.nn.GroupNorm(32,256),
-                torch.nn.ReLU(inplace=True),
-                torch.nn.Conv2d(256, 256, kernel_size=1, stride=1, padding=0),
-                torch.nn.GroupNorm(32,256),
-                torch.nn.ReLU(inplace=True),
-                )
     @property
     def with_rpn(self):
         """bool: whether the detector has RPN"""
@@ -192,23 +144,20 @@ class TwoStageDetectorDFPN(BaseDetectorFinal):
     def extract_feat(self, img, hsi):
         """Directly extract features from the backbone+neck."""
         x = self.backbone(img)
-        hsi_0 = self.conv_hsi(hsi)
-        x_hsi = self.backbone_hsi(hsi)
-        if self.with_neck:
-            x_hsi = self.neck_hsi(x_hsi)
-        x_hsi_0 = self.conv_neck_hsi( hsi_0 + self.up3(x_hsi[0]))
-        x_hsi = (x_hsi_0,) + x_hsi
-        x = [self.conv_down[i](x[i]) for i in range(len(x))]
-        x_hsi = [F.interpolate(x_hsi[0], size= (x[i].shape[-2],x[i].shape[-1]), mode='bicubic') for i in range(len(x))]
+        x_hsi = self.backbone_hsi(hsi.tanh())
+        x_att = self.neck_hsi(x_hsi)
 
-        x_f = [self.conv_fusion(torch.cat([x_hsi[i], x[i]], dim=1 )) for i in range(len(x))]
-        x_att = [ self.conv_att(x_f[i]) for i in range(len(x))]
-        x = [x_f[i] * x_att[i] for i in range(len(x_f))]
+        x_hsi = [F.interpolate(x_hsi[i], size= (x[i].shape[-2],x[i].shape[-1]), mode='bilinear') for i in range(len(x_hsi))]
+        
+        x_att = [self.conv_att(x_att[i]) for i in range(len(x_hsi))]
+
+        x_att = [F.interpolate((x_att[i]), size= (x[i].shape[-2],x[i].shape[-1]), mode='bilinear') for i in range(len(x_hsi))]
+
+        x = [x_att[i] * torch.cat( (x[i], x_hsi[i]), dim=1) for i in range(len(x))]
 
         if self.with_neck:
             x = self.neck(x)
         return x
-        #  x = [ x[i] * x_att[i] for i in range(len(x)-1)] + x[-1]
 
     def forward_dummy(self, img, hsi):
         """Used for computing network flops.

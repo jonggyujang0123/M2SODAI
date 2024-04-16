@@ -267,7 +267,12 @@ def imshow_det_bboxes(img,
         'segms.shape[0] and labels.shape[0] should have the same length.'
     assert segms is not None or bboxes is not None, \
         'segms and bboxes should not be None at the same time.'
-
+    if img.shape[2] != 3:
+        img = img[:,:,1:4]
+        img = (np.tanh(img) + 1 ) /2 * 255
+#        img_min = img.min(axis=1, keepdims=True).min(axis=0,keepdims=True)
+#        img_max = img.max(axis=1, keepdims=True).max(axis=0,keepdims=True)
+#        img = (img - img_min) / (img_max - img_min) * 255
     img = mmcv.imread(img).astype(np.uint8)
 
     if score_thr > 0:
@@ -373,6 +378,7 @@ def imshow_det_bboxes(img,
             plt.show(block=False)
             plt.pause(wait_time)
     if out_file is not None:
+        out_file = out_file.replace('.mat','.jpg')
         mmcv.imwrite(img, out_file)
 
     plt.close()

@@ -33,33 +33,42 @@ class HSI_PCA():
 
         self.mean = mean_std['mean'] # (1,127)
         self.std = mean_std['std'] # (1,127)
-        self.n_batches = 200
+        self.n_batches = 400
         self.n_components= 30
         self.in_channel = 127
         self.inc_pca = IncrementalPCA(n_components=self.n_components)
+
+        self.max = np.zeros([1,127])
+        self.min = np.zeros([1,127])
+
         if load:
             self.load_data()
             if os.path.isfile('./data/pca_mean_std.mat'):
                 self.mean_pca = sio.loadmat('./data/pca_mean_std.mat')['mean']
                 self.std_pca = sio.loadmat('./data/pca_mean_std.mat')['std']
 
-    def normalize(self, img):
+    def normalize(self, img, test=False):
         img = img.reshape([-1,self.in_channel])
-        #  mean = np.mean(img, axis=0, keepdims=True)
-        #  std = np.std(img, axis=0, keepdims=True)
-        img_org = img +0.0
-        _max = np.max(img, axis=0, keepdims=True)
-        tmp = img / _max
-        mean = np.zeros([1,self.in_channel])
-        for i in range(self.in_channel):
-            tmp2 =  np.bincount(np.uint8(tmp[:,i]*255))
-            tmp2[0] = 0
-            mean[0,i] = np.argmax(tmp2) / 255.0 * _max[0,i]
+        img_org = img + 0.0
+        img = img[img.sum(axis=1) !=0, :]
 
-        img = (img - self.mean) / self.std
-        #  img = img / mean
-        img[img_org.sum(axis=1) == 0, :] = 0
-        return img
+
+        mean = np.mean(img, axis=0, keepdims=True)
+        std = np.std(img, axis=0, keepdims=True)
+
+        max_ = img.max(axis=0, keepdims=True)
+        min_ = img.min(axis=0, keepdims=True)
+        self.max = np.maximum(self.max, max_)
+        self.min = np.minimum(self.min, min_)
+
+        if test: 
+            img = (img_org - mean) 
+            img = (img) / self.std
+            return img 
+        else:
+            img = (img - mean)
+            img = (img)/ self.std
+            return img 
 
 
     def update_pca(self):
@@ -99,19 +108,14 @@ class HSI_PCA():
     def compute_mean_std(self):
         mean = np.zeros([1,self.n_components])
         var = np.zeros([1,self.n_components])
-        self.train_files = np.random.permutation(self.train_files)
-        for ind in tqdm(self.train_files):
-            org_ = sio.loadmat(ind)['data']
-            org_ = self.normalize(org_)
-            pca_result = self.inc_pca.transform(org_.reshape([-1,self.in_channel])).astype(np.float32)
-            mean += np.mean(pca_result,axis=0,keepdims=True)
-        mean /= len(self.train_files)
-
-        for X_batch in tqdm(self.train_files):
-            org_ = sio.loadmat(ind)['data']
-            org_ = self.normalize(org_)
-            pca_result = self.inc_pca.transform(org_.reshape([-1,self.in_channel])).astype(np.float32)
-            var += np.sum((pca_result - mean)**2,axis=0,keepdims=True)
+        files = glob.glob('data/train_pca/*mat')
+        for file in tqdm(files):
+            pca_result = sio.loadmat(file)['data'].reshape([-1, self.n_components])
+            mean += np.mean(pca_result,axis=0,keepdims=True) 
+        mean /= len(files)
+        for file in tqdm(files):
+            pca_result = sio.loadmat(file)['data'].reshape([-1, self.n_components])
+            var += np.var(pca_result,axis=0,keepdims=True) 
         var /= len(self.train_files)
         std = np.sqrt(var)
         sio.savemat('./data/pca_mean_std.mat',{'mean':mean,'std':std})
@@ -122,10 +126,8 @@ class HSI_PCA():
     def transform(self,img):
         shp = img.shape[0:2]+ (self.n_components,)
         img = img.reshape([-1,self.in_channel])
-        img = self.normalize(img)
-        #  img = (img - self.mean) / self.std
+        img = self.normalize(img, test=True)
         img = self.inc_pca.transform(img)
-        #  img = (img - self.mean_pca)/self.std_pca
         return img.reshape(shp).astype(np.float32)
 
         #  return self.inc_pca.transform(img.reshape([-1,self.in_channel])).reshape(shp).astype(np.float32)
@@ -163,29 +165,17 @@ class HSI_PCA():
             sio.savemat('./data/val_pca/'+ind.split('/')[-1],{'data':pca_result})
         print('done')
 
-        if not os.path.isdir('./data/test_clean_pca'):
-            os.mkdir('./data/test_clean_pca')
-        for ind in tqdm(self.test_clean_files):
-            org_ = sio.loadmat(ind)['data']
-            pca_result = self.transform(org_).astype(np.float32)
-            sio.savemat('./data/test_clean_pca/'+ind.split('/')[-1],{'data':pca_result})
-        print('done')
-
-        if not os.path.isdir('./data/test_effect_pca'):
-            os.mkdir('./data/test_effect_pca')
-        for ind in tqdm(self.test_effect_files):
-            org_ = sio.loadmat(ind)['data']
-            pca_result = self.transform(org_).astype(np.float32)
-            sio.savemat('./data/test_effect_pca/'+ind.split('/')[-1],{'data':pca_result})
-
         
 if __name__ == '__main__':
     print('start')
     pca = HSI_PCA()
     pca.update_pca()
     pca.save_data()
-    #  pca = HSI_PCA(load=True)
     pca.save_imgs()
+#    pca = HSI_PCA(load=True)
+    pca.compute_mean_std()
+
+
     #  pca.compute_mean_std()
     #  pca = HSI_PCA(load=True)
     #  A = sio.loadmat('data/train/1006.mat')['data']

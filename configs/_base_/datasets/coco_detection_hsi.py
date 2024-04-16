@@ -1,18 +1,16 @@
 # dataset settings
-import scipy.io as sio
+import numpy as np
 dataset_type = 'CocoDataset_DMC'
 data_root = './data/'
 
-mean_std = sio.loadmat('./data/mean_std.mat')
-mean_tmp = mean_std['mean'].reshape([-1]) # (1,127)
-std_tmp = mean_std['std'].reshape([-1]) # (1,127)
+mean_tmp = np.zeros([30])
+std_tmp = np.ones([30])
 img_norm_cfg = dict(
 mean=mean_tmp.tolist(),std=std_tmp.tolist(),to_rgb=False)
 
-del mean_std
+del np
 del mean_tmp
 del std_tmp
-del sio
 
 train_pipeline = [
     dict(type='LoadImageFromHSI'),
@@ -61,7 +59,7 @@ data = dict(
       ann_file=data_root + 'test_coco/annotations_HSI.json',
       img_prefix=data_root + 'test_coco/',
         pipeline=test_pipeline,
-        separate_eval=True)
+        )
     )
 
 evaluation = dict(interval=1, metric='bbox', save_best='bbox_mAP')

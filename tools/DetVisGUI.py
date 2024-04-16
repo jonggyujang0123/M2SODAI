@@ -539,6 +539,7 @@ class vis_tool:
             font = cv2.FONT_HERSHEY_SIMPLEX
 
             if self.show_gt_txt.get():
+                img = img.astype(np.uint8)
                 if ymax + 30 >= self.img_height:
                     cv2.rectangle(img, (xmin, ymin),
                                   (xmin + len(cls_name) * 10, int(ymin - 20)),

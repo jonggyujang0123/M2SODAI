@@ -128,10 +128,9 @@ def main():
             bbox_color=dataset.PALETTE,
             text_color=dataset.PALETTE,
             mask_color=dataset.PALETTE,
-            #font_size=30,
-            #thickness=4
+            font_size=0,
+            thickness=1
             )
-
         progress_bar.update()
     print(f'ships : {np.sum(label_tot==0)}')
     print(f'floating_matters : {np.sum(label_tot==1)}')

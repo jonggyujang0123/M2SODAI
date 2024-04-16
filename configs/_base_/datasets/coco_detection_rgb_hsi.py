@@ -1,21 +1,10 @@
 # dataset settings
-#  import scipy.io as sio
 dataset_type = 'CocoDataset_DMC'
 data_root = './data/'
 
-#  mean_std = sio.loadmat(data_root + '/mean_std.mat')
-#  mean_tmp = mean_std['mean'].reshape([-1]) # (1,127)
-#  std_tmp = mean_std['std'].reshape([-1]) # (1,127)
 img_norm_cfg = dict(mean=[123.6, 116.2, 103.5],
                     std=[58.39, 56.12, 57.3],
-                    #  mean_hsi=mean_tmp.tolist(),
-                    #  std_hsi=std_tmp.tolist(),
                     to_rgb=False)
-
-#  del mean_std
-#  del mean_tmp
-#  del std_tmp
-#  del sio
 
 train_pipeline = [
     dict(type='LoadImageFrom_JPG_HSI'),
@@ -25,7 +14,6 @@ train_pipeline = [
          img_scale= [(1600, 1600)],
          multiscale_mode='value',
          hsi_scale=[(224,224)], keep_ratio=True),
-    #dict(type='MinIoURandomCrop', min_ious=(0.1, 0.3, 0.5, 0.7,0.9)),
     dict(type='Normalize_JPG_HSI', **img_norm_cfg),
     dict(type='Pad', size_divisor=32),
     dict(type='DefaultFormatBundle'),

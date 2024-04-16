@@ -1382,14 +1382,13 @@ class Normalize:
                 result dict.
         """
         for key in results.get('img_fields', ['img']):
-            if results[key].shape[2] < 4:
-                results[key] = mmcv.imnormalize(results[key], self.mean, self.std,
+            results[key] = mmcv.imnormalize(results[key], self.mean, self.std,
                                                 self.to_rgb) * (results[key]>0)
-            else:
-#                results[key] = np.clip(mmcv.imnormalize(results[key], self.mean, self.std,
-#                self.to_rgb),-4.0, 4.0)* (results[key][:,:,0:1]>0)
-                results[key] = self.pca.transform(np.clip(mmcv.imnormalize(results[key], self.mean, self.std,
-                    self.to_rgb),-1.0, 1.0))* (results[key][:,:,0:1]>0)
+#            else:
+##                results[key] = np.clip(mmcv.imnormalize(results[key], self.mean, self.std,
+##                self.to_rgb),-4.0, 4.0)* (results[key][:,:,0:1]>0)
+#                results[key] = self.pca.transform(np.clip(mmcv.imnormalize(results[key], self.mean, self.std,
+#                    self.to_rgb),-1.0, 1.0))* (results[key][:,:,0:1]>0)
             
         results['img_norm_cfg'] = dict(
             mean=self.mean, std=self.std, to_rgb=self.to_rgb)
