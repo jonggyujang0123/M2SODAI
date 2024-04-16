@@ -1,9 +1,3 @@
-> :warning: Because I did not regularly check the issue tab, my response is usually delayed a few days. I am sincerely sorry for that. Hence, I closed the issue tab and made [this form](https://forms.gle/fNu5fic3wSC16KU37).
-> Now, please directly email me via **jgjang [at] gmail [dot] com** or fill out [this form](https://forms.gle/fNu5fic3wSC16KU37). If I am not too busy, you will receive the email in 24 hours. Simple questions and chatting (even not related to this work) are welcome!
-> I will do my best to update to prevent the same issues from recurring (See [FAQ](https://github.com/jonggyujang0123/M2SODAI?tab=readme-ov-file#5-faq) and [TODO LIST](https://github.com/jonggyujang0123/M2SODAI?tab=readme-ov-file#4-todo-list)).
-
----
-
 <h1 align="center"> M<sup>2</sup>SODAI: Multi-Modal Ship and Floating Matter Detection Image Dataset With RGB and Hyperspectral Image Sensors
 </h1>
 
@@ -21,12 +15,13 @@
 
 ---
 
-
+- [FAQ](https://github.com/jonggyujang0123/M2SODAI?tab=readme-ov-file#5-faq)
+- [TODO LIST](https://github.com/jonggyujang0123/M2SODAI?tab=readme-ov-file#4-todo-list).
 
 ## News
 
 
-- **2024/04:** We correct this repo. Thanks to `Another-0` and `Xiaodian Zhang`. We sincerely apologize for being later than the promised time, and we truly appreciate your continued interest in our work.
+- **2024/04:** We correct this repo. Thanks to `Another-0` and `Xiaodian Zhang`. We sincerely apologize for being later than the promised time, and we truly appreciate your continued interest in our work. Please use the current dataset/code. 
 - **2024/02: This repo requires some updates:** Now, we recognize that some files are missing when we upload the source code (data preprocessing). We will fix this issue by **Uploading preprocessing code**, as well as **processed data** and **Replica of the trained weights**. 
 
 --- 
