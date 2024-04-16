@@ -78,7 +78,7 @@ Download the processed data via the above link or you can generate it yourself.
 ```
 
 
-- run data_tools/lableme2coco.py 
+- (Skip) run data_tools/lableme2coco.py 
 
 ```bash
 python data_tools/labelme2coco.py data/train data/train_coco --label data/label.txt
@@ -86,7 +86,7 @@ python data_tools/labelme2coco.py data/test data/test_coco --label data/label.tx
 python data_tools/labelme2coco.py data/val data/val_coco --label data/label.txt
 ```
 
-- make `pca_mean_std.mat` and IPCA. 
+- (Skip) make `pca_mean_std.mat` and IPCA. 
 
 ```bash
 python tools/IPCA_data.py
