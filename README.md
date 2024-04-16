@@ -15,7 +15,7 @@
 
 ---
 
-Because I rarely check this issue tab, please email to me via `jgjang0123 [at] gmail [dot] com` or fill out [this form](https://forms.gle/fNu5fic3wSC16KU37).
+Because I rarely check this issue tab, please email me via `jgjang0123 [at] gmail [dot] com` or fill out [this form](https://forms.gle/fNu5fic3wSC16KU37).
 
 
 
