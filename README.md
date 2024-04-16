@@ -21,7 +21,7 @@
 ## News
 
 
-- **2024/04:** We correct this repo. Thanks to `Another-0` and `Xiaodian Zhang`. We sincerely apologize for being later than the promised time, and we truly appreciate your continued interest in our work. Please use the current dataset/code. 
+- **2024/04:** We correct this repo. Thanks to `Another-0` and `Xiaodian Zhang`. We sincerely apologize for being later than the promised time, and we truly appreciate your continued interest in our work. The previous code is wrong; hence, please use the current dataset/code. 
 - **2024/02: This repo requires some updates:** Now, we recognize that some files are missing when we upload the source code (data preprocessing). We will fix this issue by **Uploading preprocessing code**, as well as **processed data** and **Replica of the trained weights**. 
 
 --- 
