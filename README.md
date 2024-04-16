@@ -15,6 +15,10 @@
 
 ---
 
+Because I rarely check this issue tab, please email to me via `jgjang0123 [at] gmail [dot] com` or fill out [this form](https://forms.gle/fNu5fic3wSC16KU37).
+
+
+
 ## News
 
 - **2024/04:** We correct this repo. Thanks to `Another-0` and `Xiaodian Zhang`. We sincerely apologize for being later than the promised time, and we truly appreciate your continued interest in our work.
