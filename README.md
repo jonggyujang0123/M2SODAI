@@ -21,9 +21,9 @@
 
 ## News
 
-
-- **2024/04:** We correct this repo. Thanks to `Another-0` and `Xiaodian Zhang`. We sincerely apologize for being later than the promised time, and we truly appreciate your continued interest in our work. The previous code is wrong; hence, please use the current dataset/code. 
-- **2024/02: This repo requires some updates:** Now, we recognize that some files are missing when we upload the source code (data preprocessing). We will fix this issue by **Uploading preprocessing code**, as well as **processed data** and **Replica of the trained weights**. 
+- **2024/04: Add Image Registration History.** Some people are interested in our image registration procedure (`rgb` and `hsi` data). Now, the overall procedure is available [here](https://github.com/jonggyujang0123/M2SODAI/blob/master/History_Registration/2_1_Auto_Imgreg_v2.ipynb). It is very **time-consuming** and **labor-intensive job**(I worked all night for about 4-5 days doing only this registration procedure from scratch.). So, If you mail me before starting, I can give you **tip/advice** I learned doing this. 
+- **2024/04: Correct this repo.** We correct this repo. Thanks to `Another-0` and `Xiaodian Zhang`. We sincerely apologize for being later than the promised time, and we truly appreciate your continued interest in our work. The previous code is wrong; hence, please use the current dataset/code. 
+- **2024/02: Recognize mistakes in our repo.** Now, we recognize that some files are missing/wrong when we upload the source code. We will fix this issue by **Uploading preprocessing code**, as well as **processed data** and **Replica of the trained weights**. 
 
 --- 
 
