@@ -144,7 +144,8 @@ python tools/test.py {config_file} {ckpt_file} --eval bbox
 
 ## 4. TODO LIST
 
-- [ ] Something... 
+- [ ] Split images from 1600x1600 to 400x400 (make 11GB GPU work)
+
 
 ## 5. FAQ
 
