@@ -145,7 +145,8 @@ python tools/test.py {config_file} {ckpt_file} --eval bbox
 
 ## 4. TODO LIST
 
-- [ ] Split images by 400x400 (make 11GB GPU work)
+- [ ] Split images by 400x400 (make 11GB GPU work).
+  - One challenge is that most of the target objects are cut out doing this. Is there anyone who has an idea to solve this? 
 
 
 ## 5. FAQ
