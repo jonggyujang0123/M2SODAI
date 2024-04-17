@@ -17,6 +17,7 @@
 
 - [FAQ](https://github.com/jonggyujang0123/M2SODAI?tab=readme-ov-file#5-faq)
 - [TODO LIST](https://github.com/jonggyujang0123/M2SODAI?tab=readme-ov-file#4-todo-list).
+- [Dataset Inquire Form](https://forms.gle/oDEcL3ULFebzmy8u7)
 
 ## News
 
@@ -59,9 +60,20 @@ pip install -v -e .  # or "python setup.py develop"
 
 ## 2. Prepare Dataset
 
-- Dataset: [GDrive](https://drive.google.com/file/d/1yGDveAVqwus_cMltHnwaR_Lx97zIatoG/view?usp=sharing)
+**Download**
 
-Download the processed data via the above link or you can generate it yourself.
+To encourage related research, we will provide datasets upon your request. 
+Please email your name and affiliation to the person in charge (jgjang0123 at gmail dot com). We ask for your information only to ensure that the dataset is used for non-commercial purposes. Do not provide this to third parties or post it publicly anywhere.
+
+- Name
+- Affiliation
+- Google ID to share this dataset.
+
+<!--
+- Dataset: [GDrive](https://drive.google.com/file/d/1yGDveAVqwus_cMltHnwaR_Lx97zIatoG/view?usp=sharing)
+-->
+
+Download the processed data via the above link. 
 
 ```
 .M2SODAI
