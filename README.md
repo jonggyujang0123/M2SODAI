@@ -156,3 +156,18 @@ python tools/test.py {config_file} {ckpt_file} --eval bbox
 
 - This work is forked from MMdetection Repository https://github.com/open-mmlab/mmdetection
 - A useful instruction of Faster R-CNN: https://www.lablab.top/post/how-does-faster-r-cnn-work-part-ii/
+
+## Cite this work 
+
+```bib
+@inproceedings{NEURIPS2023_a8757b88,
+	author = {Jang, Jonggyu and Oh, Sangwoo and Kim, Youjin and Seo, Dongmin and Choi, Youngchol and Yang, Hyun Jong},
+	booktitle = {Advances in Neural Information Processing Systems},
+	editor = {A. Oh and T. Neumann and A. Globerson and K. Saenko and M. Hardt and S. Levine},
+	pages = {53831--53843},
+	publisher = {Curran Associates, Inc.},
+	title = {M\^{}\lbrace 2\rbrace SODAI: Multi-Modal Maritime Object Detection Dataset With RGB and Hyperspectral Image Sensors},
+	url = {https://proceedings.neurips.cc/paper_files/paper/2023/file/a8757b889350a3782b384a3ec0dfbae9-Paper-Datasets_and_Benchmarks.pdf},
+	volume = {36},
+	year = {2023},
+```
