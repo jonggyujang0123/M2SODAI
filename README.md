@@ -64,15 +64,11 @@ pip install -v -e .  # or "python setup.py develop"
 **Download**
 
 To encourage related research, we will provide datasets upon your request. 
-Please email your name and affiliation to the person in charge (`jgjang0123 [at] gmail [dot] com`). We ask for your information only to ensure that the dataset is used for **non-commercial purposes**. 
+Please fill out [this form](https://forms.gle/An6AaxPVEgWc75ad7). 
+We ask for your information only to ensure that the dataset is used for **non-commercial purposes**. 
 I will give you access authority within 24 hours. If not, please remind me again.
 
-- Keyword **[BANANA]** in the subject line
-- Name
-- Affiliation
-- Google ID to share this dataset
-
-Do not provide this to third parties or post it publicly anywhere.
+Do not provide this dataset to third parties or post it publicly anywhere.
 
 <!--
 - Dataset: [GDrive](https://drive.google.com/file/d/1yGDveAVqwus_cMltHnwaR_Lx97zIatoG/view?usp=sharing)
