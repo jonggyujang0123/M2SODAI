@@ -21,6 +21,7 @@
 
 ## News
 
+- **2024/04: Preparing OneDrive Link** For people who cannot access Google Drive, I will prepare OneDrive Link. Due to my storage limit, only preprocessed data will be accessible. 
 - **2024/04: Add Image Registration History.** Some people are interested in our image registration procedure (`rgb` and `hsi` data). Now, the overall procedure is available [here](https://github.com/jonggyujang0123/M2SODAI/blob/master/History_Registration/2_1_Auto_Imgreg_v2.ipynb). It is very **time-consuming** and **labor-intensive job**(I worked all night for about 4-5 days doing only this registration procedure from scratch.). So, If you mail me before starting, I can give you **tip/advice** I learned doing this.
    - Due to the policy of the research institute, we cannot provide **raw** data of RGB/HSI sensors. If you have plan for building another dataset using image registration, I can help you for free.  
 - **2024/04: Correct this repo.** We correct this repo. Thanks to `Another-0` and `Xiaodian Zhang`. We sincerely apologize for being later than the promised time, and we truly appreciate your continued interest in our work. The previous code is wrong; hence, please use the current dataset/code. 
@@ -66,7 +67,7 @@ pip install -v -e .  # or "python setup.py develop"
 To encourage related research, we will provide datasets upon your request. 
 Please fill out [this form](https://forms.gle/An6AaxPVEgWc75ad7). 
 We ask for your information only to ensure that the dataset is used for **non-commercial purposes**. 
-I will give you access authority within 24 hours. If not, please remind me again.
+I will give you access authority within 1~2 days. If not, please remind me again.
 
 Do not provide this dataset to third parties or post it publicly anywhere.
 
