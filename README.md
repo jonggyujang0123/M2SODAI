@@ -142,9 +142,10 @@ python tools/test.py {config_file} {ckpt_file} --eval bbox
 
 ## 4. TODO LIST
 
-- [ ] Split images by 400x400 (make 11GB GPU work).
-  - One challenge is that most of the target objects are cut out doing this. Is there anyone who has an idea to solve this? 
-
+- [ ] One Drive Dataset/Trained Weights Link. Thank you for your contribution, `Yangfan Li`. Due date: April 26. 
+- [ ] Split images by smaller ones (make 11GB GPU work). May be until end of April.
+  - ~~One challenge is that most of the target objects are cut out doing this. Is there anyone who has an idea to solve this?~~
+  - Use `https://github.com/dingjiansw101/AerialDetection/blob/master/DOTA_devkit/ImgSplit_multi_process.py`. Thank you for your contribution, `Xiaodian Zhang`. 
 
 ## 5. FAQ
 
