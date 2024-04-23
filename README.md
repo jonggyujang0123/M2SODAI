@@ -143,7 +143,7 @@ python tools/test.py {config_file} {ckpt_file} --eval bbox
 ## 4. TODO LIST
 
 - [ ] One Drive Dataset/Trained Weights Link. **Due date: April 26.**
-  - Thank you for your contribution, `Yangfan Li`. 
+  - Thank you for your suggestion, `Yangfan Li`. 
 - [ ] Split images by smaller ones (make 11GB GPU work). **Due date: end of April.**
   - ~~One challenge is that most of the target objects are cut out doing this. Is there anyone who has an idea to solve this?~~
   - Use `https://github.com/dingjiansw101/AerialDetection/blob/master/DOTA_devkit/ImgSplit_multi_process.py`. Thank you for your contribution, `Xiaodian Zhang`. 
