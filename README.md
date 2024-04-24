@@ -21,7 +21,8 @@
 
 ## News
 
-- **2024/04: Preparing OneDrive Link** For people who cannot access Google Drive, I will prepare OneDrive Link. Due to my storage limit, only preprocessed data will be accessible. 
+- **2024/05: Splitted Dataset (with corresponding trained weights) Will Be Provided.**
+- **2024/04: OneDrive Link.** For people who cannot access Google Drive, I will prepare OneDrive Link. Due to my storage limit, only preprocessed data will be accessible. 
 - **2024/04: Add Image Registration History.** Some people are interested in our image registration procedure (`rgb` and `hsi` data). Now, the overall procedure is available [here](https://github.com/jonggyujang0123/M2SODAI/blob/master/History_Registration/2_1_Auto_Imgreg_v2.ipynb). It is very **time-consuming** and **labor-intensive job**(I worked all night for about 4-5 days doing only this registration procedure from scratch.). So, If you mail me before starting, I can give you **tip/advice** I learned doing this.
    - Due to the policy of the research institute, we cannot provide **raw** data of RGB/HSI sensors. If you have plan for building another dataset using image registration, I can help you for free.  
 - **2024/04: Correct this repo.** We correct this repo. Thanks to `Another-0` and `Xiaodian Zhang`. We sincerely apologize for being later than the promised time, and we truly appreciate your continued interest in our work. The previous code is wrong; hence, please use the current dataset/code. 
@@ -131,20 +132,23 @@ python tools/test.py {config_file} {ckpt_file} --eval bbox
 ### 3.1. Replica of Trained Weights
 - R-50-RGB-HSI
   - mAP: 43.7
-  - Model [(link)](https://drive.google.com/file/d/1yFmdFjg-Cb3mDlsg7LcTtVq3EewN9Aq_/view?usp=sharing)
+  - Model [(GDrive)](https://drive.google.com/file/d/1yFmdFjg-Cb3mDlsg7LcTtVq3EewN9Aq_/view?usp=sharing)
+  - Model [(OneDrive)]([https://drive.google.com/file/d/1yFmdFjg-Cb3mDlsg7LcTtVq3EewN9Aq_/view?usp=sharing](https://unistackr0-my.sharepoint.com/:u:/g/personal/jonggyu_unist_ac_kr/EY-5dI9osuJEiaAeOt0Rgt4BCwsTxj-nX-YZrljO5Db0qQ?e=sf4DY3))
 - R-50-RGB
   - mAP: 37.7
-  - Model [(link)](https://drive.google.com/file/d/1yFkNq1imh_ajxcY9pq7GEE23md0gB9mC/view?usp=sharing)
+  - Model [(GDrive)](https://drive.google.com/file/d/1yFkNq1imh_ajxcY9pq7GEE23md0gB9mC/view?usp=sharing)
+  - Model [(OneDrive)](https://unistackr0-my.sharepoint.com/:u:/g/personal/jonggyu_unist_ac_kr/EVc3nsVlmbVMoDvmPYQAnRABE9-TsvpumKp_CuInqxE7gw?e=2aNeam)
 - R-50-HSI (The mAP is enhanced while correcting our code)
   - mAP: 13.2
-  - Model [(link)](https://drive.google.com/file/d/1yFE_yEZdQysPF1JQWBzvKRhyjg0CQHOG/view?usp=sharing)
+  - Model [(GDrive)](https://drive.google.com/file/d/1yFE_yEZdQysPF1JQWBzvKRhyjg0CQHOG/view?usp=sharing)
+  - Model [(OneDrive)](https://unistackr0-my.sharepoint.com/:u:/g/personal/jonggyu_unist_ac_kr/ET9YD97TkCRAn0Wu9qgBIkIBiNEGz5zGgM8U7kUXsS_csw?e=dTivl9)
 
 
 ## 4. TODO LIST
 
-- [ ] One Drive Dataset/Trained Weights Link. **Due date: April 26.**
+- [X] One Drive Dataset/Trained Weights Link. 
   - Thank you for your suggestion, `Yangfan Li`. 
-- [ ] Split images by smaller ones (make 11GB GPU work). **Due date: end of April.**
+- [ ] (In processing) Split images by smaller ones (make 11GB GPU work). **Due date: end of April.**
   - ~~One challenge is that most of the target objects are cut out doing this. Is there anyone who has an idea to solve this?~~
   - Use `https://github.com/dingjiansw101/AerialDetection/blob/master/DOTA_devkit/ImgSplit_multi_process.py`. Thank you for your contribution, `Xiaodian Zhang`. 
 
