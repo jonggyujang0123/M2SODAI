@@ -133,7 +133,7 @@ python tools/test.py {config_file} {ckpt_file} --eval bbox
 - R-50-RGB-HSI
   - mAP: 43.7
   - Model [(GDrive)](https://drive.google.com/file/d/1yFmdFjg-Cb3mDlsg7LcTtVq3EewN9Aq_/view?usp=sharing)
-  - Model [(OneDrive)]([https://drive.google.com/file/d/1yFmdFjg-Cb3mDlsg7LcTtVq3EewN9Aq_/view?usp=sharing](https://unistackr0-my.sharepoint.com/:u:/g/personal/jonggyu_unist_ac_kr/EY-5dI9osuJEiaAeOt0Rgt4BCwsTxj-nX-YZrljO5Db0qQ?e=sf4DY3))
+  - Model [(OneDrive)](https://unistackr0-my.sharepoint.com/:u:/g/personal/jonggyu_unist_ac_kr/EY-5dI9osuJEiaAeOt0Rgt4BCwsTxj-nX-YZrljO5Db0qQ?e=sf4DY3)
 - R-50-RGB
   - mAP: 37.7
   - Model [(GDrive)](https://drive.google.com/file/d/1yFkNq1imh_ajxcY9pq7GEE23md0gB9mC/view?usp=sharing)
